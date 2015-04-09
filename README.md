@@ -9,21 +9,31 @@ http://www.r-project.org/Licenses/GPL-2
 General install notes
 ---------------------
 # dependencies (on a clean ubuntu installation)
+```
 sudo apt-get install autoconf automake libtool g++
+```
 
 # creating all auxiliary files
+```
 autoreconf -fvi
+```
 
 # building
+```
 ./configure
 make
+```
 
 # or, if JAGS has been installed in a different location, e.g. /usr
+```
 ./configure --prefix /usr
 make
+```
 
 # install
+```
 sudo make install
+```
 
 Windows Compiling and Installation
 ----------------------------------
@@ -33,9 +43,11 @@ Linux
 
 # For building the module in Windows it is easiest to use a tarball that
 # was created in linux like this (starting from a source clone):
+```
 autoreconf -fvi
 ./configure
 make dist-gzip
+```
 
 # Copy the *.tar.gz file to your msys home directory and continue from
 # there.
