@@ -8,29 +8,30 @@ http://www.r-project.org/Licenses/GPL-2
 
 General install notes
 ---------------------
-# dependencies (on a clean ubuntu installation)
+
+Install dependencies (on a clean ubuntu installation)
 ```
 sudo apt-get install autoconf automake libtool g++
 ```
 
-# creating all auxiliary files
+Creating all auxiliary files
 ```
 autoreconf -fvi
 ```
 
-# building
+Building
 ```
 ./configure
 make
 ```
 
-# or, if JAGS has been installed in a different location, e.g. /usr
+or, if JAGS has been installed in a different location, e.g. /usr
 ```
 ./configure --prefix /usr
 make
 ```
 
-# install
+Install
 ```
 sudo make install
 ```
@@ -38,69 +39,66 @@ sudo make install
 Windows Compiling and Installation
 ----------------------------------
 
-Linux
-"""""
+## Linux
 
-# For building the module in Windows it is easiest to use a tarball that
-# was created in linux like this (starting from a source clone):
+For building the module in Windows it is easiest to use a tarball that was created in linux like this (starting from a source clone):
+
 ```
 autoreconf -fvi
 ./configure
 make dist-gzip
 ```
 
-# Copy the *.tar.gz file to your msys home directory and continue from
-# there.
+Copy the *.tar.gz file to your msys home directory and continue from there.
 
-Windows
-"""""""
+## Windows
 
-# - Install MinGW (MinGW installer including msys):
-#   http://www.mingw.org
-#   In MinGW get installer: msys-base is all you need.
-#
-# - Install TDM-GCC Compiler Suite:
-#   http://tdm-gcc.tdragon.net 
-#   Use the exact same version of tdm-gcc as has been used to compile your
-#   JAGS Version on your system. In that case, also don't forget to untick
-#   the  "Check for updated files on the TDM-GCC server" 
-#   during the installation proccess of tdm-gcc. 
-#   For Jags-3.3.0 and Jags-3.4.0 use: 
-#   tdm64-gcc-4.6.1.exe
-#
-# - Delete all *.dll.a files int the TDM-GCC Installation, so the
-#   compiler will link to the static libraries.
-#
-# - Change path in c:/mingw/msys/1.0/etc/fstab from
-#   this:     c:/mingw /mingw
-#   to:       c:/MinGW64 /mingw
-#   to use TDM-GCC compilers
+- Install MinGW (MinGW installer including msys):
+  http://www.mingw.org
+  In MinGW get installer: msys-base is all you need.
 
-# --> Start msys, extract tarball in your home dir, 
-#     cd into dir and do the following:
+- Install TDM-GCC Compiler Suite:
+  http://tdm-gcc.tdragon.net 
+  Use the exact same version of tdm-gcc as has been used to compile your
+  JAGS Version on your system. In that case, also don't forget to untick
+  the  "Check for updated files on the TDM-GCC server" 
+  during the installation proccess of tdm-gcc. 
+  For Jags-3.3.0 and Jags-3.4.0 use: 
+  tdm64-gcc-4.6.1.exe
 
-# + Note: the module needs the JAGS include files and
-#   the JAGS libraries.
-#   Therefore use the -L and -I options, as shown below.
+- Delete all *.dll.a files int the TDM-GCC Installation, so the
+  compiler will link to the static libraries.
 
-# - For building 32bit binaries
-CXX="g++ -m32" \
-./configure LDFLAGS="-L/c/Progra~1/JAGS/JAGS-3.4.0/i386/bin" CXXFLAGS="-I/c/Progra~1/JAGS/JAGS-3.4.0/include"
+- Change path in c:/mingw/msys/1.0/etc/fstab from
+  this:     c:/mingw /mingw
+  to:       c:/MinGW64 /mingw
+  to use TDM-GCC compilers
 
-make win32
+--> Start msys, extract tarball in your home dir, 
+    cd into dir and do the following:
+ + Note: the module needs the JAGS include files and
+  the JAGS libraries.
+  Therefore use the -L and -I options, as shown below.
+ - For building 32bit binaries
+```
+  CXX="g++ -m32" \
+  ./configure LDFLAGS="-L/c/Progra~1/JAGS/JAGS-3.4.0/i386/bin" CXXFLAGS="-I/c/Progra~1/JAGS/JAGS-3.4.0/include"
 
-# - For building 64bit binaries
+  make win32
+```
+
+- For building 64bit binaries
+```
 CXX="g++ -m64" \
 ./configure LDFLAGS="-L/c/Progra~1/JAGS/JAGS-3.4.0/x64/bin" CXXFLAGS="-I/c/Progra~1/JAGS/JAGS-3.4.0/include"
 
 make win64
+```
 
-# - Copy the win/win32/bernoulli.* or win/win64/bernoulli.* 
-#   files to your JAGS modules directory to enable the module.
-#   For JAGS-3.4.0 this usually is: 
-#   x64: C:\Program Files\JAGS\JAGS-3.4.0\x64\modules
-#   x32: C:\Program Files\JAGS\JAGS-3.4.0\x32\modules
+- Copy the win/win32/bernoulli.* or win/win64/bernoulli.* 
+  files to your JAGS modules directory to enable the module.
+  For JAGS-3.4.0 this usually is: 
+  x64: C:\Program Files\JAGS\JAGS-3.4.0\x64\modules
+  x32: C:\Program Files\JAGS\JAGS-3.4.0\x32\modules
 
-# + Note: If you compile both 32bit and 64bit don't forget to
-make clean
-#   between the building.
++ Note: If you compile both 32bit and 64bit don't forget to make clean between the building.
